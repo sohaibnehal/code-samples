@@ -1,3 +1,34 @@
-/**
- * Created by sohaibnehal on 16/10/2017.
- */
+// Using async/await to fetch data from two APIs
+//Using endpoints from https://jsonplaceholder.typicode.com
+
+//Requiring axios module
+const axios = require('axios');
+
+//Defining API requests as a service
+const service = {
+    //Using default Parameter Values
+    getPost: (postId = 1) => axios({url: 'https://jsonplaceholder.typicode.com/posts/' + postId}),
+    getComments: (postId = 1) => axios({url: 'https://jsonplaceholder.typicode.com/posts/' + postId + '/comments?postId=' + postId})
+};
+
+//Async function to fetch data
+const fetchData = async() => {
+    //To handle errors
+    try {
+        //getComments would not be hit until getPost is resolved
+        const post = await service.getPost();
+        const comments = await service.getComments();
+
+        //Logging out the responses
+        console.log('Responses', {
+            post: post['data'],
+            comments: comments['data']
+        });
+    }
+        //Catching any possible error
+    catch (err) {
+        console.log(err);
+    }
+};
+
+fetchData();
