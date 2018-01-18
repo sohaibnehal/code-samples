@@ -24,11 +24,23 @@ const fetchData = async() => {
             post: post['data'],
             comments: comments['data']
         });
-    }
-        //Catching any possible error
-    catch (err) {
+    } catch (err) {
         console.log(err);
     }
 };
 
-fetchData();
+//Parallel async function to fetch data
+const fetchDataParallel = async() => {
+    //To handle errors
+    try {
+        //getComments would not be hit until getPost is resolved
+        const [post, comments] = Promise.all([service.getPost(), service.getComments()]);
+        //Logging out the responses
+        console.log('Responses', {
+            post: post['data'],
+            comments: comments['data']
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    const service = {
+        //Using default Parameter Values
+        getPost: (postId = 1) => fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`),
+        getComments: (postId = 1) => fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments?postId=${postId}`)
+    };
+
+    //Async function to fetch data in parallel
+    const fetchData = async() => {
+        try {
+            const [ postResponse, commentsResponse ] = await Promise.all([service.getPost(), service.getComments()]);
+            const [ post, comments ] = await Promise.all([postResponse.json(), commentsResponse.json()]);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+</script>
+</body>
+</html>
