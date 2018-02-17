@@ -1,0 +1,33 @@
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: exo, sans-serif;
+    color: #777;
+}
+.bg {
+    background-image: url("../images/sample1-1.jpeg");
+    height: 50%;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.header-text {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+
+h3 {
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font: 20px "Lato", sans-serif;
+    color: #111;
+}
